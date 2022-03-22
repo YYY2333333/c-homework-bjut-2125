@@ -1,0 +1,191 @@
+7-1 输出三角形面积和周长 (15 分)
+本题要求编写程序，根据输入的三角形的三条边a、b、c，计算并输出面积和周长。注意：在一个三角形中， 任意两边之和大于第三边。三角形面积计算公式：area= 
+s(s−a)(s−b)(s−c)
+​
+ ，其中s=(a+b+c)/2。
+
+输入格式：
+输入为3个正整数，分别代表三角形的3条边a、b、c。
+
+输出格式：
+如果输入的边能构成一个三角形，则在一行内，按照
+
+area = 面积; perimeter = 周长
+的格式输出，保留两位小数。否则，输出
+
+These sides do not correspond to a valid triangle
+输入样例1：
+5 5 3
+输出样例1：
+area = 7.15; perimeter = 13.00
+输入样例2：
+1 4 1
+输出样例2：
+These sides do not correspond to a valid triangle
+
+#include <stdio.h>
+#include <math.h>
+int main()
+{
+    int a,b,c;
+    double s,r,p,z;
+    scanf("%d %d %d",&a,&b,&c);
+    if (a+b<=c||a+c<=b ||b+c<=a){
+        printf("These sides do not correspond to a valid triangle");}
+    else {
+        s=(a+b+c)/2.0;
+        z=s*(s-a)*(s-b)*(s-c);
+        r=sqrt(z);
+        p=a+b+c;
+        printf("area = %.2f; perimeter = %.2f",r,p); }       
+                 
+
+}
+//tip：记得调用math
+
+
+7-2 三天打鱼两天晒网 (15 分)
+中国有句俗语叫“三天打鱼两天晒网”。假设某人从某天起，开始“三天打鱼两天晒网”，问这个人在以后的第N天中是“打鱼”还是“晒网”？
+
+输入格式：
+输入在一行中给出一个不超过1000的正整数N。
+
+输出格式：
+在一行中输出此人在第N天中是“Fishing”（即“打鱼”）还是“Drying”（即“晒网”），并且输出“in day N”。
+
+输入样例1：
+103
+输出样例1：
+Fishing in day 103
+输入样例2：
+34
+输出样例2：
+Drying in day 34
+
+
+#include<stdio.h>
+int main()
+{
+    int a,b;
+    scanf("%d",&a);
+    b=a%5;
+    switch (b)
+    {
+        case 1:printf("Fishing in day %d",a);break;
+        case 2:printf("Fishing in day %d",a);break;
+        case 3:printf("Fishing in day %d",a);break;
+        case 4:printf("Drying in day %d",a);break;
+        case 0:printf("Drying in day %d",a);break;
+        
+    }
+    return 0;
+}
+
+//tip：分析时参考小学的买票问题
+
+7-3 输出闰年 (15 分)
+输出21世纪中截止某个年份以来的所有闰年年份。注意：闰年的判别条件是该年年份能被4整除但不能被100整除、或者能被400整除。
+
+输入格式:
+输入在一行中给出21世纪的某个截止年份。
+
+输出格式:
+逐行输出满足条件的所有闰年年份，即每个年份占一行。输入若非21世纪的年份则输出"Invalid year!"。若不存在任何闰年，则输出“None”。
+
+输入样例1:
+2048
+输出样例1:
+2004
+2008
+2012
+2016
+2020
+2024
+2028
+2032
+2036
+2040
+2044
+2048
+输入样例2:
+2000
+输出样例2:
+Invalid year!
+
+
+#include <stdio.h>
+int main()
+{
+    int y,a,b,c,d,e;
+    scanf("%d",&y);
+    d=2000;
+    b=0;
+    if (y<=2000||y>2100)
+    {
+        printf("Invalid year!");
+    }
+    else{
+        while(d<=y){
+        a=d%4;
+        c=d%100;
+        e=d%400;
+        if (a==0&&c!=0&&e!=0)
+        {
+            printf("%d\n",d);
+            b++;
+        }
+        d++;
+       }
+        if (b==0)
+        {
+            printf("None");
+        }
+    }
+}
+//tip：1.注意输出的顺序是从大到小，i--的那一套就不太好用了。
+//tip:2.读题细心！没有闰年要输出None。可用b++计数。
+
+微博上有个自称“大笨钟V”的家伙，每天敲钟催促码农们爱惜身体早点睡觉。不过由于笨钟自己作息也不是很规律，所以敲钟并不定时。一般敲钟的点数是根据敲钟时间而定的，如果正好在某个整点敲，那么“当”数就等于那个整点数；如果过了整点，就敲下一个整点数。另外，虽然一天有24小时，钟却是只在后半天敲1~12下。例如在23:00敲钟，就是“当当当当当当当当当当当”，而到了23:01就会是“当当当当当当当当当当当当”。在午夜00:00到中午12:00期间（端点时间包括在内），笨钟是不敲的。
+
+下面就请你写个程序，根据当前时间替大笨钟敲钟。
+
+输入格式：
+输入第一行按照hh:mm的格式给出当前时间。其中hh是小时，在00到23之间；mm是分钟，在00到59之间。
+
+输出格式：
+根据当前时间替大笨钟敲钟，即在一行中输出相应数量个Dang。如果不是敲钟期，则输出：
+
+Only hh:mm.  Too early to Dang.
+其中hh:mm是输入的时间。
+
+输入样例1：
+19:05
+输出样例1：
+DangDangDangDangDangDangDangDang
+输入样例2：
+07:05
+输出样例2：
+Only 07:05.  Too early to Dang.
+
+
+
+
+#include <stdio.h>
+int main()
+{
+    int hh,mm,i;
+    scanf("%d:%d",&hh,&mm);
+    if (hh<13||hh>=24){
+        printf("Only %02d:%02d.  Too early to Dang.",hh,mm);}
+    else {
+        if(mm>0){
+            hh++;}
+        i=hh-12;
+        while(i>0){
+            printf("Dang");
+            i--;
+        }
+    }
+}
+//
+tip：
