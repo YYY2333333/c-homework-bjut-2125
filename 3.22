@@ -1,3 +1,27 @@
+
+
+
+
+
+
+//tip：这次作业会出现贼多的{}。别看眼花。if else 多条一定加{}，不然就串了。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 7-1 输出三角形面积和周长 (15 分)
 本题要求编写程序，根据输入的三角形的三条边a、b、c，计算并输出面积和周长。注意：在一个三角形中， 任意两边之和大于第三边。三角形面积计算公式：area= 
 s(s−a)(s−b)(s−c)
@@ -187,5 +211,178 @@ int main()
         }
     }
 }
-//
-tip：
+//tip：1.其实你要是不嫌麻烦用switch也行。直接case 12次（手动滑稽）
+//tip:2.注意补零使用%02d。
+
+7-5 找出最小值 (15 分)
+
+本题要求编写程序，找出给定一系列整数中的最小值。
+输入格式：
+
+输入在一行中首先给出一个正整数n，之后是n个整数，其间以空格分隔。
+输出格式：
+
+在一行中按照“min = 最小值”的格式输出n个整数中的最小值。
+输入样例：
+
+4 -2 -123 100 0
+
+输出样例：
+
+min = -123
+
+
+#include <stdio.h>
+int main()
+{
+    int num,i,min;
+    scanf("%d",&i);
+    scanf("%d",&num);
+    min=num;
+    while (i>1){
+        scanf("%d",&num);
+          if (min>num){
+              min=num;}
+   i--;
+    }
+    printf("min = %d",min);
+}
+
+//tip：1.初始让min=num可以方便很多。不然min的赋值确实也是很难选择。
+//tip：2.初始已让min=num，所以while（i>1）。
+
+7-6 念数字 (20 分)
+
+输入一个整数，输出每个数字对应的拼音。当整数为负数时，先输出fu字。十个数字对应的拼音如下：
+
+0: ling
+1: yi
+2: er
+3: san
+4: si
+5: wu
+6: liu
+7: qi
+8: ba
+9: jiu
+
+输入格式：
+
+输入在一行中给出一个整数，如：1234。
+
+提示：整数包括负数、零和正数。
+输出格式：
+
+在一行中输出这个整数对应的拼音，每个数字的拼音之间用空格分开，行末没有最后的空格。如 yi er san si。
+输入样例：
+
+-600
+
+输出样例：
+
+fu liu ling ling
+
+
+#include<stdio.h>
+int main()
+{
+ char c;
+ c=getchar();
+ while(c!='\n')
+ {
+     switch(c){
+         case'-':printf("fu");break;
+         case'0':printf("ling");break;
+         case'1':printf("yi");break;
+         case'2':printf("er");break;
+         case'3':printf("san");break;
+         case'4':printf("si");break;
+         case'5': printf("wu");break;
+         case'6':printf("liu");break;
+         case'7': printf("qi");break;
+         case'8': printf("ba");break;
+         case'9': printf("jiu");break;}
+  c=getchar();
+  if(c!='\n') printf(" ");
+ }
+    return 0;
+}
+
+//tip：1.巧用getchar
+//tip：2.注意：pta测试运行会超时，但是答案显示正确。我这里使用linux写的并编译，可以正常运行的。（不要太相信pta网页测试）
+
+
+7-7 求e的近似值 (15 分)
+
+自然常数 e 可以用级数 1+1/1!+1/2!+⋯+1/n!+⋯ 来近似计算。本题要求对给定的非负整数 n，求该级数的前 n+1 项和。
+输入格式:
+
+输入第一行中给出非负整数 n（≤1000）。
+输出格式:
+
+在一行中输出部分和的值，保留小数点后八位。
+输入样例:
+
+10
+
+输出样例:
+
+2.71828180
+
+
+#include <stdio.h>
+int main()
+{
+     double e,a,i,p,t;
+    e=0;
+    p=1;
+    scanf("%lf",&t);
+    for(i=1;i<=t;i++){
+     p=p*i;
+     a=p;
+     e=e+1.0/a;}
+    printf("%.8lf",e+1);
+         
+}
+
+//tip1:这里注意用doubule就行，不然精度不够。
+//tip2：这题循环用i--会麻烦非常多。顺次用i++就好
+
+
+7-8 特殊a串数列求和 (20 分)
+
+给定两个均不超过9的正整数a和n，要求编写程序求a+aa+aaa++⋯+aa⋯a（n个a）之和。
+输入格式：
+
+输入在一行中给出不超过9的正整数a和n。
+输出格式：
+
+在一行中按照“s = 对应的和”的格式输出。
+输入样例：
+
+2 3
+
+输出样例：
+
+s = 246
+
+#include <stdio.h>
+int main ()
+{
+    int a,s,i,n,p,z;
+    scanf("%d %d",&a,&n);
+    s=a;
+    p=a;
+    z=a;
+    for (i=1;i<=n-1;i++){
+     p=10*p;
+     s=s+p;
+     z=z+s;}
+    printf("s = %d",z);
+}
+
+//tip1:这里思路可以分解来做，先解决如何弄出a ，aa，aaa，aaaa .......然后再相加
+//tip2：初始赋值a，然后后面减少一次循环就好。
+
+
+
