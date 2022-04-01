@@ -1,0 +1,389 @@
+国家给出了 8 岁男宝宝的标准身高为 130 厘米、标准体重为 27 公斤；8 岁女宝宝的标准身高为 129 厘米、标准体重为 25 公斤。
+
+现在你要根据小宝宝的身高体重，给出补充营养的建议。
+
+输入格式：
+输入在第一行给出一个不超过 10 的正整数 N，随后 N 行，每行给出一位宝宝的身体数据：
+
+性别 身高 体重
+其中性别是 1 表示男生，0 表示女生。身高和体重都是不超过 200 的正整数。
+
+输出格式：
+对于每一位宝宝，在一行中给出你的建议：
+
+如果太矮了，输出：duo chi yu!（多吃鱼）；
+如果太瘦了，输出：duo chi rou!（多吃肉）；
+如果正标准，输出：wan mei!（完美）；
+如果太高了，输出：ni li hai!（你厉害）；
+如果太胖了，输出：shao chi rou!（少吃肉）。
+先评价身高，再评价体重。两句话之间要有 1 个空格。
+
+输入样例：
+4
+0 130 23
+1 129 27
+1 130 30
+0 128 27
+输出样例：
+ni li hai! duo chi rou!
+duo chi yu! wan mei!
+wan mei! shao chi rou!
+duo chi yu! shao chi rou!
+
+
+
+#include <stdio.h>
+int main()
+{
+    int i,sex,h,w;
+    scanf("%d",&i);
+    while(i!=0){
+        scanf("%d %d %d",&sex,&h,&w);
+        if (sex==0&&h<129){
+            printf("duo chi yu! ");
+            if (w<25) printf("duo chi rou!\n");
+            if (w==25) printf("wan mei!\n");
+            if (w>25) printf("shao chi rou!\n");
+        }
+        if (sex==0&&h==129){
+            printf("wan mei! ");
+            if (w<25) printf("duo chi rou!\n");
+            if (w==25) printf("wan mei!\n");
+            if (w>25) printf("shao chi rou!\n");
+        }
+        if (sex==0&&h>129){
+            printf("ni li hai! ");
+            if (w<25) printf("duo chi rou!\n");
+            if (w==25) printf("wan mei!\n");
+            if (w>25) printf("shao chi rou!\n");
+        }
+        if (sex==1&&h<130){
+            printf("duo chi yu! ");
+            if (w<27) printf("duo chi rou!\n");
+            if (w==27) printf("wan mei!\n");
+            if (w>27) printf("shao chi rou!\n");
+        }
+        if (sex==1&&h==130){
+            printf("wan mei! ");
+            if (w<27) printf("duo chi rou!\n");
+            if (w==27) printf("wan mei!\n");
+            if (w>27) printf("shao chi rou!\n");
+        }
+        if (sex==1&&h>130){
+            printf("ni li hai! ");
+            if (w<27) printf("duo chi rou!\n");
+            if (w==27) printf("wan mei!\n");
+            if (w>27) printf("shao chi rou!\n");
+        }
+        i--;
+    }
+}
+
+
+\\tip:我这里直接全部列举了，基本上都是cv。不推荐这么写。
+
+
+
+一只猴子第一天摘下若干个桃子，当即吃了一半，还不过瘾，又多吃了一个；第二天早上又将剩下的桃子吃掉一半，又多吃了一个。以后每天早上都吃了前一天剩下的一半加一个。到第N天早上想再吃时，见只剩下一个桃子了。问：第一天共摘了多少个桃子？
+
+输入格式:
+输入在一行中给出正整数N（1<N≤10）。
+
+输出格式:
+在一行中输出第一天共摘了多少个桃子。
+
+输入样例:
+3
+输出样例:
+10
+
+
+#include <stdio.h>
+#include <math.h>
+int main()
+{
+    int d,c;
+    scanf("%d",&d);
+    c=4;
+    if (d>2){
+    while(d-2!=0){
+        c=2*c+2;
+        d--;
+    }
+    printf("%d",c);}
+    else 
+        printf("%d",c);
+}
+
+\\tip:数学问题想好就行，慢慢叠上去，找规律。
+7-3 猜数字游戏 (15 分)
+猜数字游戏是令游戏机随机产生一个100以内的正整数，用户输入一个数对其进行猜测，需要你编写程序自动对其与随机产生的被猜数进行比较，并提示大了（“Too big”），还是小了（“Too small”），相等表示猜到了。如果猜到，则结束程序。程序还要求统计猜的次数，如果1次猜出该数，提示“Bingo!”；如果3次以内猜到该数，则提示“Lucky You!”；如果超过3次但是在N（>3）次以内（包括第N次）猜到该数，则提示“Good Guess!”；如果超过N次都没有猜到，则提示“Game Over”，并结束程序。如果在到达N次之前，用户输入了一个负数，也输出“Game Over”，并结束程序。
+
+输入格式:
+输入第一行中给出两个不超过100的正整数，分别是游戏机产生的随机数、以及猜测的最大次数N。最后每行给出一个用户的输入，直到出现负数为止。
+
+输出格式:
+在一行中输出每次猜测相应的结果，直到输出猜对的结果或“Game Over”则结束。
+
+输入样例:
+58 4
+70
+50
+56
+58
+60
+-2
+输出样例:
+Too big
+Too small
+Too small
+Good Guess!
+
+
+
+#include <stdio.h>
+int main()
+{
+    int a,i,b,s;
+    scanf("%d %d",&a,&i);
+    s=1;
+    while (i!=0){
+        scanf("%d",&b);
+        if (b<=0){
+            printf("Game Over");return 0;}
+        if (b<a&&b>0){
+            printf("Too small\n");}
+        if(b>a&&b>0){
+            printf("Too big\n");}
+        if(b==a&&b>0&&s>3){
+            printf("Good Guess!");return 0;}
+         if(b==a&&b>0&&s==1){
+            printf("Bingo!");return 0;}
+        if(b==a&&b>0&&s==2){
+             printf("Lucky You!");return 0;}
+        if(b==a&&b>0&&s==3){
+             printf("Lucky You!");return 0;}
+        i--;
+        s++;
+    }
+    printf("Game Over");return 0;
+}
+\\tip:注意审题以及结束程序的条件。
+
+
+7-4 输出整数各位数字 (15 分)
+本题要求编写程序，对输入的一个整数，从高位开始逐位分割并输出它的各位数字。
+
+输入格式：
+输入在一行中给出一个长整型范围内的非负整数。
+
+输出格式：
+从高位开始逐位输出该整数的各位数字，每个数字后面有一个空格。
+
+输入样例：
+123456
+输出样例：
+1 2 3 4 5 6 
+
+
+
+#include<stdio.h>
+int main()
+{
+    char c;
+    c=getchar();
+    while(c!='\n')
+ {
+     switch(c){
+         case'0':printf("0 ");break;
+         case'1':printf("1 ");break;
+         case'2':printf("2 ");break;
+         case'3':printf("3 ");break;
+         case'4':printf("4 ");break;
+         case'5': printf("5 ");break;
+         case'6':printf("6 ");break;
+         case'7': printf("7 ");break;
+         case'8': printf("8 ");break;
+         case'9': printf("9 ");break;}
+  c=getchar();
+ }
+    return 0;
+        
+}
+
+\\tip:getchar，yyds。注意格式有“ ”。
+7-5 求符合给定条件的整数集 (15 分)
+给定不超过6的正整数A，考虑从A开始的连续4个数字。请输出所有由它们组成的无重复数字的3位数。
+
+输入格式：
+输入在一行中给出A。
+
+输出格式：
+输出满足条件的的3位数，要求从小到大，每行6个整数。整数间以空格分隔，但行末不能有多余空格。
+
+输入样例：
+2
+输出样例：
+234 235 243 245 253 254
+324 325 342 345 352 354
+423 425 432 435 452 453
+523 524 532 534 542 543
+
+
+#include<stdio.h>
+int main()
+{
+    int a,i,j,k,c;
+    scanf("%d",&a);
+    c=0;
+    for(i=a;i<=a+3;i++){
+         for(j=a;j<=a+3;j++){
+             if (i==j) continue;
+             for(k=a;k<=a+3;k++){
+                 if(k==i||k==j) continue;
+            printf("%d%d%d",i,j,k);
+                  c++;
+                 if(c%6!=0)
+                     printf(" ");
+                 else printf("\n");
+        }
+    }
+    }
+}
+\\tip:continue的运用。注意{}内的循环内容。
+
+
+7-6 幸运彩票 (15 分)
+彩票的号码有 6 位数字，若一张彩票的前 3 位上的数之和等于后 3 位上的数之和，则称这张彩票是幸运的。本题就请你判断给定的彩票是不是幸运的。
+
+输入格式：
+输入在第一行中给出一个正整数 N（≤ 100）。随后 N 行，每行给出一张彩票的 6 位数字。
+
+输出格式：
+对每张彩票，如果它是幸运的，就在一行中输出 You are lucky!；否则输出 Wish you good luck.。
+
+输入样例：
+2
+233008
+123456
+输出样例：
+You are lucky!
+Wish you good luck.
+
+
+#include<stdio.h>
+int main()
+{
+    int a,b,c,d,e,f,g,h,j,i;
+    scanf("%d",&i);
+    while(i!=0){
+       scanf("%d",&a);
+        b=a/1000;
+        c=a-b*1000;
+        d=b/100;
+        e=(b-d*100)/10;
+        f=b-d*100-e*10;
+        g=c/100;
+        h=(c-g*100)/10;
+        j=c-g*100-h*10;
+        if(d+e+f==g+h+j)
+      printf("You are lucky!\n");
+        else
+            printf("Wish you good luck.\n");
+        i--;    
+    }
+}
+\\tip:我这里是拆分的办法。感觉有点傻。不推荐吧。
+
+7-7 输出三角形字符阵列 (15 分)
+本题要求编写程序，输出n行由大写字母A开始构成的三角形字符阵列。
+
+输入格式：
+输入在一行中给出一个正整数n（1≤n<7）。
+
+输出格式：
+输出n行由大写字母A开始构成的三角形字符阵列。格式见输出样例，其中每个字母后面都有一个空格。
+
+输入样例：
+4
+输出样例：
+A B C D 
+E F G 
+H I 
+J 
+
+
+#include <stdio.h>
+int main()
+{
+    int a,i,j,k,l;
+    char c;
+    c='A';
+    k=0;
+    j=0;
+    scanf("%d",&a);
+    l=a;
+    for (i=a;i!=0;i--){
+        j=j+i;}
+    while(j!=0){
+        printf("%c ",c+k);
+            k++;
+        if(k==l){
+            printf("\n");
+            a=a-1;
+            l=l+a;           
+        }
+   j--;
+    }
+    
+}
+\\tip:什么时候加“ ”什么时候是“\n”稍微分析一下就好。
+
+7-8 找完数 (20 分)
+所谓完数就是该数恰好等于除自身外的因子之和。例如：6=1+2+3，其中1、2、3为6的因子。本题要求编写程序，找出任意两正整数m和n之间的所有完数。
+
+输入格式：
+输入在一行中给出2个正整数m和n（1<m≤n≤10000），中间以空格分隔。
+
+输出格式：
+逐行输出给定范围内每个完数的因子累加形式的分解式，每个完数占一行，格式为“完数 = 因子1 + 因子2 + ... + 因子k”，其中完数和因子均按递增顺序给出。若区间内没有完数，则输出“None”。
+
+输入样例：
+2 30
+输出样例：
+6 = 1 + 2 + 3
+28 = 1 + 2 + 4 + 7 + 14
+
+
+#include <stdio.h>
+int main()
+{
+    int a,b,i,j,k,s,cout;
+    cout=0;
+    scanf("%d %d",&a,&b);
+    i=a;
+    while(i<=b){
+        j=i/2;
+        s=0;
+        while(j>=1){
+            if (i%j==0){
+                s=s+j;}
+            j--;}
+            if(s==i){
+                printf("%d =",s);
+                for(k=1;k<s;k++){
+                    if(s%k==0&&k<s/2){
+                        printf(" %d +",k);}
+                    if(s%k==0&&k==s/2){
+                        printf(" %d\n",k);
+                    cout++;}
+            }
+             }
+    
+i++;}
+    if(cout==0)
+        printf("None");
+}
+
+
+\\tip：我这里思路是先找完数，再拆完数并输出。并用cout计数。
